@@ -1,7 +1,10 @@
+export const HEIGHT = 32;
+export const WIDTH = 64;
+
 export class Display implements DisplayInterface {
   data: boolean[][];
-  HEIGHT = 32;
-  WIDTH = 64;
+  HEIGHT = HEIGHT;
+  WIDTH = WIDTH;
 
   constructor() {
     this.data = Array.from(Array(this.WIDTH), () => new Array(this.HEIGHT));
@@ -13,5 +16,13 @@ export class Display implements DisplayInterface {
 
   setPixel(x: number, y: number, value: boolean) {
     this.data[x][y] = value;
+  }
+
+  clear(): void {
+    for (let i = 0; i < WIDTH; i++) {
+      for (let j = 0; j < HEIGHT; j++) {
+        this.setPixel(i, j, false);
+      }
+    }
   }
 }

@@ -1,3 +1,4 @@
+import { Cpu } from '../Cpu';
 import { Opcode } from './Opcode';
 
 export class AddRegisterOpcode extends Opcode {
@@ -7,5 +8,8 @@ export class AddRegisterOpcode extends Opcode {
     super();
     this.register = register;
     this.value = value;
+  }
+  execute(cpu: Cpu): void {
+    cpu.registersV[this.register] += this.value;
   }
 }
