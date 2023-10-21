@@ -1,8 +1,6 @@
 import { Display, WIDTH, HEIGHT } from '../../../application/graphics/Display';
 import { Emulator } from '../../emulator/Emulator';
-import { AddRegisterOpcode } from './AddRegisterOpcode';
 import { ClearScreenOpcode } from './ClearScreenOpcode';
-import { JumpOpCode } from './JumpOpcode';
 
 describe('Clear screen', () => {
   it('Add register', () => {

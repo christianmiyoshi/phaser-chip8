@@ -1,7 +1,6 @@
 import { Display } from '../../../application/graphics/Display';
 import { Emulator } from '../../emulator/Emulator';
 import { AddRegisterOpcode } from './AddRegisterOpcode';
-import { JumpOpCode } from './JumpOpcode';
 
 describe('Add register opcode', () => {
   it('Add register', () => {

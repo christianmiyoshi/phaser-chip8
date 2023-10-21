@@ -8,6 +8,8 @@ export class Emulator {
   display: DisplayInterface;
   cpu: Cpu;
 
+  private readonly ROM_START_ADDRESS = 0x200;
+
   constructor(display: DisplayInterface) {
     this.display = display;
     this.memory = new Memory();
@@ -20,7 +22,7 @@ export class Emulator {
   }
 
   loadRom(data: Uint8Array) {
-    this.memory.load(0x200, data);
+    this.memory.load(this.ROM_START_ADDRESS, data);
   }
 
   cycle() {
