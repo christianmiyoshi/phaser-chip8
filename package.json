@@ -1,7 +1,7 @@
 {
-  "name": "phaser-typescript-skeleton",
+  "name": "phaser-chip-8",
   "version": "1.0.0",
-  "description": "A simple skeleton to help quickly bootstraping Phaser games with TypeScript.",
+  "description": "A simple chip 8 Emulator with Phaser",
   "main": "src/game.ts",
   "license": "GPL-3.0",
   "keywords": [
