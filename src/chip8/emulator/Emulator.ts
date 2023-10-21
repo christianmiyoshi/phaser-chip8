@@ -13,6 +13,6 @@ export class Emulator {
   }
 
   init() {
-    this.memory.loadFont();
+    this.memory.loadFont(0x200);
   }
 }
