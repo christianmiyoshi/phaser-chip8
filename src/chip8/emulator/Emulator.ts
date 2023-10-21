@@ -13,6 +13,10 @@ export class Emulator {
   }
 
   init() {
-    this.memory.loadFont(0x200);
+    this.memory.loadFont(0x050);
+  }
+
+  loadRom(data: Uint8Array) {
+    this.memory.load(0x200, data);
   }
 }

@@ -14,9 +14,9 @@ export class Cpu {
   }
 
   fetch() {
-    const instruction_low = this.memory.getValue(this.pc);
-    const instruction_high = this.memory.getValue(this.pc + 1);
-    const instruction = instruction_low + (instruction_high << 8);
+    const instruction_high = this.memory.getValue(this.pc);
+    const instruction_low = this.memory.getValue(this.pc + 1);
+    const instruction = (instruction_high << 8) + instruction_low;
     this.currentOpcode = OpcodeFactory.build(instruction);
     this.pc += 2;
   }

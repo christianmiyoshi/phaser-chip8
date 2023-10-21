@@ -1,4 +1,4 @@
-class Display implements DisplayInterface {
+export class Display implements DisplayInterface {
   data: boolean[][];
   HEIGHT = 32;
   WIDTH = 64;

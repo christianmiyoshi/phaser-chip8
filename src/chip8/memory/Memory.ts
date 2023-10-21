@@ -15,7 +15,7 @@ export class Memory {
     return this.data[index];
   }
 
-  load(position: number, value: number[]) {
+  load(position: number, value: Uint8Array) {
     let index = 0;
     while (index < value.length) {
       this.setValue(position + index, value[index]);
@@ -26,7 +26,7 @@ export class Memory {
   loadFont(position: number = 0x200) {
     let index = position;
     for (const font of FONT) {
-      this.load(index, font);
+      this.load(index, new Uint8Array(font));
       index += font.length;
     }
   }
