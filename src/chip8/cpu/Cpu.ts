@@ -1,5 +1,7 @@
 import { Emulator } from '../emulator/Emulator';
 import { Memory } from '../memory/Memory';
+import { Opcode } from './opcodes/Opcode';
+import { OpcodeFactory } from './opcodes/OpcodeFactory';
 
 export class Cpu {
   pc: number;
