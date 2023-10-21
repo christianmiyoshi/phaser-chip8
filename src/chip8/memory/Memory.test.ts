@@ -1,4 +1,4 @@
-import { Memory } from './memory';
+import { Memory } from './Memory';
 
 describe('Memory test', () => {
   it('Memory should set and get value', () => {
