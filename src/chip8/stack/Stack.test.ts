@@ -9,6 +9,6 @@ describe('Stack test', () => {
 
     expect(0x3).toEqual(stack.pop());
     expect(0x2).toEqual(stack.pop());
-    expect(0x01).toEqual(stack.pop());
+    expect(0x1).toEqual(stack.pop());
   });
 });
