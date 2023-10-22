@@ -24,7 +24,7 @@ module.exports = {
   module: {
     rules: [
       {
-        test: /\.(png|jpe?g|svg|bin)/i,
+        test: /\.(png|jpe?g|svg|ch8)/i,
         loader: 'file-loader',
         options: {
           name: 'assets/[name].[ext]',

@@ -1,4 +1,4 @@
-import ibmBin from '@assets/ibm.bin';
+import ibmBin from '@assets/ibm.ch8';
 import PhaserImg from '@objects/PhaserImg';
 import { Display, WIDTH, HEIGHT } from 'src/application/graphics/Display';
 import { Emulator } from 'src/chip8/emulator/Emulator';

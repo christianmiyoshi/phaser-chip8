@@ -19,7 +19,7 @@ declare module '*.svg' {
   export default value;
 }
 
-declare module '*.bin' {
+declare module '*.ch8' {
   const value: any;
   export default value;
 }
