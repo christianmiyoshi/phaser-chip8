@@ -7,7 +7,7 @@ import { SetIndexRegisterOpcode } from '../opcodes/SetIndexRegisterOpcode';
 import { SetRegisterOpcode } from '../opcodes/SetRegisterOpcode';
 
 export class OpcodeFactory {
-  static build(instruction: number): Opcode {
+  static build(instruction: number): Opcode | null {
     const bytes = [
       instruction & 0xf,
       (instruction >> 4) & 0xf,
@@ -35,6 +35,6 @@ export class OpcodeFactory {
         return new DisplayOpcode(bytes[2], bytes[1], bytes[0]);
       }
     }
-    throw Error('Opcode not recognized');
+    return null
   }
 }

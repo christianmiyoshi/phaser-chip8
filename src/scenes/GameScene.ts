@@ -1,5 +1,5 @@
 import ibmBin from '@assets/ibm.ch8';
-import PhaserImg from '@objects/PhaserImg';
+import testOpcodeRom from '@assets/test_opcode.ch8'
 import { Display, WIDTH, HEIGHT } from 'src/application/graphics/Display';
 import { Emulator } from 'src/chip8/emulator/Emulator';
 
@@ -18,7 +18,7 @@ export class GameScene extends Phaser.Scene {
 
   create(): void {
     this.graphics = this.add.graphics();
-    const data = this.cache.binary.get('ibm') as Uint8Array;
+    const data = this.cache.binary.get('test_rom') as Uint8Array;
     this.emulator.loadRom(data);
   }
 
@@ -26,6 +26,11 @@ export class GameScene extends Phaser.Scene {
     this.load.binary({
       key: 'ibm',
       url: ibmBin,
+      dataType: Uint8Array,
+    });
+    this.load.binary({
+      key: 'test_rom',
+      url: testOpcodeRom,
       dataType: Uint8Array,
     });
   }
