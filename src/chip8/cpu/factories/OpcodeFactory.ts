@@ -1,10 +1,13 @@
 import { AddRegisterOpcode } from '../opcodes/AddRegisterOpcode';
+import { BinaryDecimalConversionOpcode } from '../opcodes/BinaryDecimalConversionOpcode';
 import { ClearScreenOpcode } from '../opcodes/ClearScreenOpcode';
 import { DisplayOpcode } from '../opcodes/DisplayOpcode';
 import { JumpOpCode } from '../opcodes/JumpOpcode';
 import { Opcode } from '../opcodes/Opcode';
 import { SetIndexRegisterOpcode } from '../opcodes/SetIndexRegisterOpcode';
 import { SetRegisterOpcode } from '../opcodes/SetRegisterOpcode';
+import { SkipVxEqualsNNOpcode } from '../opcodes/SkipVxEqualsNNOpcode';
+import { SkipVxNotEqualNNOpcode } from '../opcodes/SkipVxNotEqualNNOpcode';
 
 export class OpcodeFactory {
   static build(instruction: number): Opcode | null {
@@ -16,23 +19,19 @@ export class OpcodeFactory {
     ];
 
     switch (bytes[3]) {
-      case 0x0: {
-        return new ClearScreenOpcode();
-      }
-      case 0x1: {
-        return new JumpOpCode(instruction & 0x0fff);
-      }
-      case 0x6: {
-        return new SetRegisterOpcode(bytes[2], instruction & 0x00ff);
-      }
-      case 0x7: {
-        return new AddRegisterOpcode(bytes[2], instruction & 0x00ff);
-      }
-      case 0xa: {
-        return new SetIndexRegisterOpcode(instruction & 0x0fff);
-      }
-      case 0xd: {
-        return new DisplayOpcode(bytes[2], bytes[1], bytes[0]);
+      case 0x0: return new ClearScreenOpcode();
+      case 0x1: return new JumpOpCode(instruction & 0x0fff);
+      case 0x3: return new SkipVxEqualsNNOpcode(bytes[2], instruction & 0xff);
+      case 0x4: return new SkipVxNotEqualNNOpcode(bytes[2], instruction & 0xff);
+      case 0x6: return new SetRegisterOpcode(bytes[2], instruction & 0x00ff);
+      case 0x7: return new AddRegisterOpcode(bytes[2], instruction & 0x00ff);
+      case 0xa: return new SetIndexRegisterOpcode(instruction & 0x0fff);
+      case 0xd: return new DisplayOpcode(bytes[2], bytes[1], bytes[0]);
+      case 0xf: {
+        switch(instruction & 0xff){
+          case 0x33: return new BinaryDecimalConversionOpcode(bytes[2]);
+        }
+        break
       }
     }
     return null

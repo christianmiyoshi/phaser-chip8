@@ -5,6 +5,9 @@ import { SetRegisterOpcode } from '../opcodes/SetRegisterOpcode';
 import { AddRegisterOpcode } from '../opcodes/AddRegisterOpcode';
 import { SetIndexRegisterOpcode } from '../opcodes/SetIndexRegisterOpcode';
 import { DisplayOpcode } from '../opcodes/DisplayOpcode';
+import { BinaryDecimalConversionOpcode } from '../opcodes/BinaryDecimalConversionOpcode';
+import { SkipVxEqualsNNOpcode } from '../opcodes/SkipVxEqualsNNOpcode';
+import { SkipVxNotEqualNNOpcode } from '../opcodes/SkipVxNotEqualNNOpcode';
 
 describe('Opcode factory test', () => {
   it('Decode clear screen', () => {
@@ -48,5 +51,27 @@ describe('Opcode factory test', () => {
     expect(display.x).toEqual(0x1);
     expect(display.y).toEqual(0x2);
     expect(display.value).toEqual(0x3);
+  });
+  it('Binary-coded decimal conversion', () => {
+    const opcode = OpcodeFactory.build(0xf133);
+    expect(opcode).toBeInstanceOf(BinaryDecimalConversionOpcode);
+    const display = opcode as BinaryDecimalConversionOpcode;
+    expect(display.register).toEqual(0x1);
+  });
+
+  it('Skip 3xNN', () => {
+    const opcode = OpcodeFactory.build(0x3123);
+    expect(opcode).toBeInstanceOf(SkipVxEqualsNNOpcode);
+    const display = opcode as SkipVxEqualsNNOpcode;
+    expect(display.registerX).toEqual(0x1);
+    expect(display.value).toEqual(0x23);
+  });
+
+  it('Skip 4xNN', () => {
+    const opcode = OpcodeFactory.build(0x4123);
+    expect(opcode).toBeInstanceOf(SkipVxNotEqualNNOpcode);
+    const display = opcode as SkipVxNotEqualNNOpcode;
+    expect(display.registerX).toEqual(0x1);
+    expect(display.value).toEqual(0x23);
   });
 });
