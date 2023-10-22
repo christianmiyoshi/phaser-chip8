@@ -36,4 +36,8 @@ export class Cpu {
 
     this.currentOpcode.execute(this);
   }
+
+  clearRegisterI(){
+    this.registerI = 0
+  }
 }
