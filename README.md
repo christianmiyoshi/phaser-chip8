@@ -14,7 +14,7 @@ $ npm run dev
 ## Resources
 
 - [Guide to making a CHIP-8 emulator](https://tobiasvl.github.io/blog/write-a-chip-8-emulator/)
-- [IBM logo Rom](https://github.com/loktar00/chip8/blob/master/roms/IBM%20Logo.ch8)
+- [IBM logo Rom](https://github.com/loktar00/chip8/tree/master)
 
 ## License
 
