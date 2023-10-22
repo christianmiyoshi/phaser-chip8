@@ -5,6 +5,12 @@ import { SetRegisterOpcode } from '../opcodes/SetRegisterOpcode';
 import { AddRegisterOpcode } from '../opcodes/AddRegisterOpcode';
 import { SetIndexRegisterOpcode } from '../opcodes/SetIndexRegisterOpcode';
 import { DisplayOpcode } from '../opcodes/DisplayOpcode';
+import { BinaryDecimalConversionOpcode } from '../opcodes/BinaryDecimalConversionOpcode';
+import { SkipVxEqualsNNOpcode } from '../opcodes/SkipVxEqualsNNOpcode';
+import { SkipVxNotEqualNNOpcode } from '../opcodes/SkipVxNotEqualNNOpcode';
+import { SkipVxEqualVyOpcode } from '../opcodes/SkipVxEqualVyOpcode';
+import { SkipVxNotEqualVyOpcode } from '../opcodes/SkipVxNotEqualVyOpcode';
+import { SetRegisterVxEqualVy } from '../opcodes/SetRegisterVxEqualVy';
 
 describe('Opcode factory test', () => {
   it('Decode clear screen', () => {
@@ -26,19 +32,27 @@ describe('Opcode factory test', () => {
     expect(jump.value).toEqual(0xbc);
   });
 
-  it('Add value to register', () => {
+  it('Add 7XNN', () => {
     const opcode = OpcodeFactory.build(0x7abc);
     expect(opcode).toBeInstanceOf(AddRegisterOpcode);
     const jump = opcode as AddRegisterOpcode;
-    expect(jump.register).toEqual(0xa);
+    expect(jump.registerX).toEqual(0xa);
     expect(jump.value).toEqual(0xbc);
   });
 
-  it('Set index register', () => {
+  it('Set index register ANNN', () => {
     const opcode = OpcodeFactory.build(0xa123);
     expect(opcode).toBeInstanceOf(SetIndexRegisterOpcode);
-    const jump = opcode as SetIndexRegisterOpcode;
-    expect(jump.value).toEqual(0x123);
+    const indexRegisterOpcode = opcode as SetIndexRegisterOpcode;
+    expect(indexRegisterOpcode.value).toEqual(0x123);
+  });
+
+  it('Set Vx = Vy 8XY0', () => {
+    const opcode = OpcodeFactory.build(0x8ab0);
+    expect(opcode).toBeInstanceOf(SetRegisterVxEqualVy);
+    const indexRegisterOpcode = opcode as SetRegisterVxEqualVy;
+    expect(indexRegisterOpcode.registerX).toEqual(0xa);
+    expect(indexRegisterOpcode.registerY).toEqual(0xb);
   });
 
   it('Display', () => {
@@ -48,5 +62,42 @@ describe('Opcode factory test', () => {
     expect(display.x).toEqual(0x1);
     expect(display.y).toEqual(0x2);
     expect(display.value).toEqual(0x3);
+  });
+  it('Binary-coded decimal conversion', () => {
+    const opcode = OpcodeFactory.build(0xf133);
+    expect(opcode).toBeInstanceOf(BinaryDecimalConversionOpcode);
+    const display = opcode as BinaryDecimalConversionOpcode;
+    expect(display.register).toEqual(0x1);
+  });
+
+  it('Skip 3xNN', () => {
+    const opcode = OpcodeFactory.build(0x3123);
+    expect(opcode).toBeInstanceOf(SkipVxEqualsNNOpcode);
+    const display = opcode as SkipVxEqualsNNOpcode;
+    expect(display.registerX).toEqual(0x1);
+    expect(display.value).toEqual(0x23);
+  });
+
+  it('Skip 4xNN', () => {
+    const opcode = OpcodeFactory.build(0x4123);
+    expect(opcode).toBeInstanceOf(SkipVxNotEqualNNOpcode);
+    const display = opcode as SkipVxNotEqualNNOpcode;
+    expect(display.registerX).toEqual(0x1);
+    expect(display.value).toEqual(0x23);
+  });
+
+  it('Skip 5XY0', () => {
+    const opcode = OpcodeFactory.build(0x5120);
+    expect(opcode).toBeInstanceOf(SkipVxEqualVyOpcode);
+    const display = opcode as SkipVxEqualVyOpcode;
+    expect(display.registerX).toEqual(0x1);
+    expect(display.registerY).toEqual(0x2);
+  });
+  it('Skip 9XY0', () => {
+    const opcode = OpcodeFactory.build(0x9120);
+    expect(opcode).toBeInstanceOf(SkipVxNotEqualVyOpcode);
+    const display = opcode as SkipVxNotEqualVyOpcode;
+    expect(display.registerX).toEqual(0x1);
+    expect(display.registerY).toEqual(0x2);
   });
 });
