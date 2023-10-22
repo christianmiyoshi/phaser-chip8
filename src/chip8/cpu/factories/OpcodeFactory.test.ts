@@ -31,11 +31,11 @@ describe('Opcode factory test', () => {
     expect(jump.value).toEqual(0xbc);
   });
 
-  it('Add value to register', () => {
+  it('Add 7XNN', () => {
     const opcode = OpcodeFactory.build(0x7abc);
     expect(opcode).toBeInstanceOf(AddRegisterOpcode);
     const jump = opcode as AddRegisterOpcode;
-    expect(jump.register).toEqual(0xa);
+    expect(jump.registerX).toEqual(0xa);
     expect(jump.value).toEqual(0xbc);
   });
 

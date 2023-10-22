@@ -41,4 +41,12 @@ export class Cpu {
   clearRegisterI(){
     this.registerI = 0
   }
+
+  setRegisterValue(index: number, value : number){
+    this.registersV[index] = value & 0xff
+  }
+  
+  addRegisterValue(index: number, value : number){
+    this.setRegisterValue(index, this.registersV[index] + value)
+  }
 }

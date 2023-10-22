@@ -1,15 +1,9 @@
 import { Cpu } from '../Cpu';
 import { Opcode } from './Opcode';
+import { Opcode0XNN } from './Opcode0XNN';
 
-export class AddRegisterOpcode extends Opcode {
-  register: number;
-  value: number;
-  constructor(register: number, value: number) {
-    super();
-    this.register = register;
-    this.value = value;
-  }
+export class AddRegisterOpcode extends Opcode0XNN {
   execute(cpu: Cpu): void {
-    cpu.registersV[this.register] += this.value;
+    cpu.addRegisterValue(this.registerX, this.value)
   }
 }

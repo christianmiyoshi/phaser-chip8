@@ -1,7 +1,6 @@
 import { Display } from '../../../application/graphics/Display';
 import { Emulator } from '../../emulator/Emulator';
 import { SkipVxEqualVyOpcode } from './SkipVxEqualVyOpcode';
-import { SkipVxNotEqualNNOpcode } from './SkipVxNotEqualNNOpcode';
 
 describe('Skip if register vx is equal to VY', () => {
   it('It should skip if VX == VY', () => {
