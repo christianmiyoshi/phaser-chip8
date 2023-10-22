@@ -8,6 +8,8 @@ import { DisplayOpcode } from '../opcodes/DisplayOpcode';
 import { BinaryDecimalConversionOpcode } from '../opcodes/BinaryDecimalConversionOpcode';
 import { SkipVxEqualsNNOpcode } from '../opcodes/SkipVxEqualsNNOpcode';
 import { SkipVxNotEqualNNOpcode } from '../opcodes/SkipVxNotEqualNNOpcode';
+import { SkipVxEqualVyOpcode } from '../opcodes/SkipVxEqualVyOpcode';
+import { SkipVxNotEqualVyOpcode } from '../opcodes/SkipVxNotEqualVyOpcode';
 
 describe('Opcode factory test', () => {
   it('Decode clear screen', () => {
@@ -73,5 +75,20 @@ describe('Opcode factory test', () => {
     const display = opcode as SkipVxNotEqualNNOpcode;
     expect(display.registerX).toEqual(0x1);
     expect(display.value).toEqual(0x23);
+  });
+
+  it('Skip 5XY0', () => {
+    const opcode = OpcodeFactory.build(0x5120);
+    expect(opcode).toBeInstanceOf(SkipVxEqualVyOpcode);
+    const display = opcode as SkipVxEqualVyOpcode;
+    expect(display.registerX).toEqual(0x1);
+    expect(display.registerY).toEqual(0x2);
+  });
+  it('Skip 9XY0', () => {
+    const opcode = OpcodeFactory.build(0x9120);
+    expect(opcode).toBeInstanceOf(SkipVxNotEqualVyOpcode);
+    const display = opcode as SkipVxNotEqualVyOpcode;
+    expect(display.registerX).toEqual(0x1);
+    expect(display.registerY).toEqual(0x2);
   });
 });

@@ -6,8 +6,10 @@ import { JumpOpCode } from '../opcodes/JumpOpcode';
 import { Opcode } from '../opcodes/Opcode';
 import { SetIndexRegisterOpcode } from '../opcodes/SetIndexRegisterOpcode';
 import { SetRegisterOpcode } from '../opcodes/SetRegisterOpcode';
+import { SkipVxEqualVyOpcode } from '../opcodes/SkipVxEqualVyOpcode';
 import { SkipVxEqualsNNOpcode } from '../opcodes/SkipVxEqualsNNOpcode';
 import { SkipVxNotEqualNNOpcode } from '../opcodes/SkipVxNotEqualNNOpcode';
+import { SkipVxNotEqualVyOpcode } from '../opcodes/SkipVxNotEqualVyOpcode';
 
 export class OpcodeFactory {
   static build(instruction: number): Opcode | null {
@@ -23,8 +25,20 @@ export class OpcodeFactory {
       case 0x1: return new JumpOpCode(instruction & 0x0fff);
       case 0x3: return new SkipVxEqualsNNOpcode(bytes[2], instruction & 0xff);
       case 0x4: return new SkipVxNotEqualNNOpcode(bytes[2], instruction & 0xff);
+      case 0x5: {
+        if(bytes[0] === 0){
+          return new SkipVxEqualVyOpcode(bytes[2], bytes[1]);
+        }
+        break;
+      }
       case 0x6: return new SetRegisterOpcode(bytes[2], instruction & 0x00ff);
       case 0x7: return new AddRegisterOpcode(bytes[2], instruction & 0x00ff);
+      case 0x9: {
+        if(bytes[0] === 0){
+          return new SkipVxNotEqualVyOpcode(bytes[2], bytes[1]);
+        }
+        break;
+      }
       case 0xa: return new SetIndexRegisterOpcode(instruction & 0x0fff);
       case 0xd: return new DisplayOpcode(bytes[2], bytes[1], bytes[0]);
       case 0xf: {
