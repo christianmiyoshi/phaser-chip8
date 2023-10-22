@@ -10,6 +10,7 @@ import { SkipVxEqualsNNOpcode } from '../opcodes/SkipVxEqualsNNOpcode';
 import { SkipVxNotEqualNNOpcode } from '../opcodes/SkipVxNotEqualNNOpcode';
 import { SkipVxEqualVyOpcode } from '../opcodes/SkipVxEqualVyOpcode';
 import { SkipVxNotEqualVyOpcode } from '../opcodes/SkipVxNotEqualVyOpcode';
+import { SetRegisterVxEqualVy } from '../opcodes/SetRegisterVxEqualVy';
 
 describe('Opcode factory test', () => {
   it('Decode clear screen', () => {
@@ -39,11 +40,19 @@ describe('Opcode factory test', () => {
     expect(jump.value).toEqual(0xbc);
   });
 
-  it('Set index register', () => {
+  it('Set index register ANNN', () => {
     const opcode = OpcodeFactory.build(0xa123);
     expect(opcode).toBeInstanceOf(SetIndexRegisterOpcode);
-    const jump = opcode as SetIndexRegisterOpcode;
-    expect(jump.value).toEqual(0x123);
+    const indexRegisterOpcode = opcode as SetIndexRegisterOpcode;
+    expect(indexRegisterOpcode.value).toEqual(0x123);
+  });
+
+  it('Set Vx = Vy 8XY0', () => {
+    const opcode = OpcodeFactory.build(0x8ab0);
+    expect(opcode).toBeInstanceOf(SetRegisterVxEqualVy);
+    const indexRegisterOpcode = opcode as SetRegisterVxEqualVy;
+    expect(indexRegisterOpcode.registerX).toEqual(0xa);
+    expect(indexRegisterOpcode.registerY).toEqual(0xb);
   });
 
   it('Display', () => {
