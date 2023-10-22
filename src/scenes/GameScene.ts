@@ -18,19 +18,6 @@ export class GameScene extends Phaser.Scene {
 
   create(): void {
     this.graphics = this.add.graphics();
-
-    const particles = this.add.particles('particle');
-
-    const phaser = PhaserImg.create(this, 400, 100);
-
-    const emitter = particles.createEmitter({
-      speed: 100,
-      scale: { start: 1, end: 0 },
-      blendMode: 'ADD',
-    });
-
-    emitter.startFollow(phaser);
-
     const data = this.cache.binary.get('ibm') as Uint8Array;
     this.emulator.loadRom(data);
   }

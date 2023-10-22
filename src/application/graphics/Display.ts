@@ -8,14 +8,22 @@ export class Display implements DisplayInterface {
 
   constructor() {
     this.data = Array.from(Array(this.WIDTH), () => new Array(this.HEIGHT));
+    this.clear()
+  }
+
+  getX(x: number){
+    return x % this.WIDTH
+  }
+  getY(y: number){
+    return y % this.HEIGHT
   }
 
   getPixel(x: number, y: number) {
-    return this.data[x][y];
+    return this.data[this.getX(x)][this.getY(y)];
   }
 
   setPixel(x: number, y: number, value: boolean) {
-    this.data[x][y] = value;
+    this.data[this.getX(x)][this.getY(y)] = value;
   }
 
   clear(): void {
