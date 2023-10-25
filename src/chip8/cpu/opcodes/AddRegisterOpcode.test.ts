@@ -12,7 +12,7 @@ describe('Add register opcode', () => {
     expect(emulator.cpu.registersV[0xf]).toEqual(0x22)
   });
 
-  it('Add does not overwrite value', () => {
+  it('Check registrer overflow', () => {
     const emulator = new Emulator(new Display());    
     const opcode = new AddRegisterOpcode(0xf, 0x1);
     emulator.cpu.registersV[0xf] = 0xff

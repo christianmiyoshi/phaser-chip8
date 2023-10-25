@@ -15,7 +15,7 @@
     "build": "webpack --mode production --config webpack.config.js",
     "dev": "webpack --mode development && webpack serve --mode development",
     "format": "prettier --write --config .prettierrc *.js src/**/*.ts src/*.ts",
-    "test": "jest"
+    "test": "jest --maxWorkers=1"
   },
   "author": "Christian Miyoshi <30266081+christianmiyoshi@users.noreply.github.com>",
   "engines": {
