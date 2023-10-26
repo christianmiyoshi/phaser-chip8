@@ -11,6 +11,8 @@ import { SkipVxNotEqualNNOpcode } from '../opcodes/SkipVxNotEqualNNOpcode';
 import { SkipVxEqualVyOpcode } from '../opcodes/SkipVxEqualVyOpcode';
 import { SkipVxNotEqualVyOpcode } from '../opcodes/SkipVxNotEqualVyOpcode';
 import { SetRegisterVxEqualVy } from '../opcodes/SetRegisterVxEqualVy';
+import { BinaryOrOpcode } from '../opcodes/BinaryOrOpcode';
+import { BinaryAndOpcode } from '../opcodes/BinaryAndOpcode';
 
 describe('Opcode factory test', () => {
   it('Decode clear screen', () => {
@@ -92,6 +94,20 @@ describe('Opcode factory test', () => {
     const display = opcode as SkipVxEqualVyOpcode;
     expect(display.registerX).toEqual(0x1);
     expect(display.registerY).toEqual(0x2);
+  });
+  it('Binary Or 8XY1', () => {
+    const opcode = OpcodeFactory.build(0x8121);
+    expect(opcode).toBeInstanceOf(BinaryOrOpcode);
+    const display = opcode as BinaryOrOpcode;
+    expect(display.registerX).toEqual(0x1);
+    expect(display.registerY).toEqual(0x2);
+  });
+  it('Binary And 8XY2', () => {
+    const opcode = OpcodeFactory.build(0x8ab2);
+    expect(opcode).toBeInstanceOf(BinaryAndOpcode);
+    const andOpcode = opcode as BinaryAndOpcode;
+    expect(andOpcode.registerX).toEqual(0xa);
+    expect(andOpcode.registerY).toEqual(0xb);
   });
   it('Skip 9XY0', () => {
     const opcode = OpcodeFactory.build(0x9120);
