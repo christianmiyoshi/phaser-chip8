@@ -1,5 +1,7 @@
 import { AddRegisterOpcode } from '../opcodes/AddRegisterOpcode';
+import { BinaryAndOpcode } from '../opcodes/BinaryAndOpcode';
 import { BinaryDecimalConversionOpcode } from '../opcodes/BinaryDecimalConversionOpcode';
+import { BinaryOrOpcode } from '../opcodes/BinaryOrOpcode';
 import { ClearScreenOpcode } from '../opcodes/ClearScreenOpcode';
 import { DisplayOpcode } from '../opcodes/DisplayOpcode';
 import { JumpOpCode } from '../opcodes/JumpOpcode';
@@ -37,6 +39,12 @@ export class OpcodeFactory {
       case 0x8: {
         if(bytes[0] === 0){
           return new SetRegisterVxEqualVy(bytes[2], bytes[1]);
+        }
+        if(bytes[0] === 1){
+          return new BinaryOrOpcode(bytes[2], bytes[1]);
+        }
+        if(bytes[0] === 2){
+          return new BinaryAndOpcode(bytes[2], bytes[1]);
         }
         break;
       }
