@@ -1,7 +1,9 @@
+import { AddCarryOpCode } from '../opcodes/AddCarryOpcode';
 import { AddRegisterOpcode } from '../opcodes/AddRegisterOpcode';
 import { BinaryAndOpcode } from '../opcodes/BinaryAndOpcode';
 import { BinaryDecimalConversionOpcode } from '../opcodes/BinaryDecimalConversionOpcode';
 import { BinaryOrOpcode } from '../opcodes/BinaryOrOpcode';
+import { BinaryXorOpcode } from '../opcodes/BinaryXorOpcode';
 import { ClearScreenOpcode } from '../opcodes/ClearScreenOpcode';
 import { DisplayOpcode } from '../opcodes/DisplayOpcode';
 import { JumpOpCode } from '../opcodes/JumpOpcode';
@@ -13,6 +15,8 @@ import { SkipVxEqualVyOpcode } from '../opcodes/SkipVxEqualVyOpcode';
 import { SkipVxEqualsNNOpcode } from '../opcodes/SkipVxEqualsNNOpcode';
 import { SkipVxNotEqualNNOpcode } from '../opcodes/SkipVxNotEqualNNOpcode';
 import { SkipVxNotEqualVyOpcode } from '../opcodes/SkipVxNotEqualVyOpcode';
+import { SubtractVxMinusVyOpcode } from '../opcodes/SubtractVxMinusVyOpcode';
+import { SubtractVyMinusVxOpcode } from '../opcodes/SubtractVyMinusVxOpcode';
 
 export class OpcodeFactory {
   static build(instruction: number): Opcode | null {
@@ -45,6 +49,18 @@ export class OpcodeFactory {
         }
         if(bytes[0] === 2){
           return new BinaryAndOpcode(bytes[2], bytes[1]);
+        }
+        if(bytes[0] === 3){
+          return new BinaryXorOpcode(bytes[2], bytes[1]);
+        }
+        if(bytes[0] === 4){
+          return new AddCarryOpCode(bytes[2], bytes[1]);
+        }
+        if(bytes[0] === 5){
+          return new SubtractVxMinusVyOpcode(bytes[2], bytes[1]);
+        }
+        if(bytes[0] === 7){
+          return new SubtractVyMinusVxOpcode(bytes[2], bytes[1]);
         }
         break;
       }

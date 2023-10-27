@@ -13,6 +13,10 @@ import { SkipVxNotEqualVyOpcode } from '../opcodes/SkipVxNotEqualVyOpcode';
 import { SetRegisterVxEqualVy } from '../opcodes/SetRegisterVxEqualVy';
 import { BinaryOrOpcode } from '../opcodes/BinaryOrOpcode';
 import { BinaryAndOpcode } from '../opcodes/BinaryAndOpcode';
+import { BinaryXorOpcode } from '../opcodes/BinaryXorOpcode';
+import { AddCarryOpCode } from '../opcodes/AddCarryOpcode';
+import { SubtractVxMinusVyOpcode } from '../opcodes/SubtractVxMinusVyOpcode';
+import { SubtractVyMinusVxOpcode } from '../opcodes/SubtractVyMinusVxOpcode';
 
 describe('Opcode factory test', () => {
   it('Decode clear screen', () => {
@@ -106,6 +110,34 @@ describe('Opcode factory test', () => {
     const opcode = OpcodeFactory.build(0x8ab2);
     expect(opcode).toBeInstanceOf(BinaryAndOpcode);
     const andOpcode = opcode as BinaryAndOpcode;
+    expect(andOpcode.registerX).toEqual(0xa);
+    expect(andOpcode.registerY).toEqual(0xb);
+  });
+  it('Binary XOR 8XY3', () => {
+    const opcode = OpcodeFactory.build(0x8ab3);
+    expect(opcode).toBeInstanceOf(BinaryXorOpcode);
+    const andOpcode = opcode as BinaryXorOpcode;
+    expect(andOpcode.registerX).toEqual(0xa);
+    expect(andOpcode.registerY).toEqual(0xb);
+  });
+  it('Add Carry 8XY4', () => {
+    const opcode = OpcodeFactory.build(0x8ab4);
+    expect(opcode).toBeInstanceOf(AddCarryOpCode);
+    const andOpcode = opcode as AddCarryOpCode;
+    expect(andOpcode.registerX).toEqual(0xa);
+    expect(andOpcode.registerY).toEqual(0xb);
+  });
+  it('Sub Vx-Vy 8XY5', () => {
+    const opcode = OpcodeFactory.build(0x8ab5);
+    expect(opcode).toBeInstanceOf(SubtractVxMinusVyOpcode);
+    const andOpcode = opcode as SubtractVxMinusVyOpcode;
+    expect(andOpcode.registerX).toEqual(0xa);
+    expect(andOpcode.registerY).toEqual(0xb);
+  });
+  it('Sub Vx-Vy 8XY7', () => {
+    const opcode = OpcodeFactory.build(0x8ab7);
+    expect(opcode).toBeInstanceOf(SubtractVyMinusVxOpcode);
+    const andOpcode = opcode as SubtractVyMinusVxOpcode;
     expect(andOpcode.registerX).toEqual(0xa);
     expect(andOpcode.registerY).toEqual(0xb);
   });
