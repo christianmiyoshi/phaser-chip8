@@ -17,6 +17,8 @@ import { BinaryXorOpcode } from '../opcodes/BinaryXorOpcode';
 import { AddCarryOpCode } from '../opcodes/AddCarryOpcode';
 import { SubtractVxMinusVyOpcode } from '../opcodes/SubtractVxMinusVyOpcode';
 import { SubtractVyMinusVxOpcode } from '../opcodes/SubtractVyMinusVxOpcode';
+import { RightShiftOpcode } from '../opcodes/RightShiftOpcode';
+import { LeftShiftOpcode } from '../opcodes/LeftShiftOpcode';
 
 describe('Opcode factory test', () => {
   it('Decode clear screen', () => {
@@ -138,6 +140,20 @@ describe('Opcode factory test', () => {
     const opcode = OpcodeFactory.build(0x8ab7);
     expect(opcode).toBeInstanceOf(SubtractVyMinusVxOpcode);
     const andOpcode = opcode as SubtractVyMinusVxOpcode;
+    expect(andOpcode.registerX).toEqual(0xa);
+    expect(andOpcode.registerY).toEqual(0xb);
+  });
+  it('Right shift Vx <= vy 8XY6', () => {
+    const opcode = OpcodeFactory.build(0x8ab6);
+    expect(opcode).toBeInstanceOf(RightShiftOpcode);
+    const andOpcode = opcode as RightShiftOpcode;
+    expect(andOpcode.registerX).toEqual(0xa);
+    expect(andOpcode.registerY).toEqual(0xb);
+  });
+  it('Left shift Vx <= vy 8XYe', () => {
+    const opcode = OpcodeFactory.build(0x8abe);
+    expect(opcode).toBeInstanceOf(LeftShiftOpcode);
+    const andOpcode = opcode as LeftShiftOpcode;
     expect(andOpcode.registerX).toEqual(0xa);
     expect(andOpcode.registerY).toEqual(0xb);
   });

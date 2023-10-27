@@ -7,7 +7,9 @@ import { BinaryXorOpcode } from '../opcodes/BinaryXorOpcode';
 import { ClearScreenOpcode } from '../opcodes/ClearScreenOpcode';
 import { DisplayOpcode } from '../opcodes/DisplayOpcode';
 import { JumpOpCode } from '../opcodes/JumpOpcode';
+import { LeftShiftOpcode } from '../opcodes/LeftShiftOpcode';
 import { Opcode } from '../opcodes/Opcode';
+import { RightShiftOpcode } from '../opcodes/RightShiftOpcode';
 import { SetIndexRegisterOpcode } from '../opcodes/SetIndexRegisterOpcode';
 import { SetRegisterOpcode } from '../opcodes/SetRegisterOpcode';
 import { SetRegisterVxEqualVy } from '../opcodes/SetRegisterVxEqualVy';
@@ -61,6 +63,12 @@ export class OpcodeFactory {
         }
         if(bytes[0] === 7){
           return new SubtractVyMinusVxOpcode(bytes[2], bytes[1]);
+        }
+        if(bytes[0] === 6){
+          return new RightShiftOpcode(bytes[2], bytes[1]);
+        }
+        if(bytes[0] === 0xe){
+          return new LeftShiftOpcode(bytes[2], bytes[1]);
         }
         break;
       }
