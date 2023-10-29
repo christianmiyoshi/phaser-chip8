@@ -6,9 +6,11 @@ import { BinaryOrOpcode } from '../opcodes/BinaryOrOpcode';
 import { BinaryXorOpcode } from '../opcodes/BinaryXorOpcode';
 import { ClearScreenOpcode } from '../opcodes/ClearScreenOpcode';
 import { DisplayOpcode } from '../opcodes/DisplayOpcode';
+import { JumpOffsetOpCode } from '../opcodes/JumpOffsetOpcode';
 import { JumpOpCode } from '../opcodes/JumpOpcode';
 import { LeftShiftOpcode } from '../opcodes/LeftShiftOpcode';
 import { Opcode } from '../opcodes/Opcode';
+import { RandomOpcode } from '../opcodes/RandomOpcode';
 import { RightShiftOpcode } from '../opcodes/RightShiftOpcode';
 import { SetIndexRegisterOpcode } from '../opcodes/SetIndexRegisterOpcode';
 import { SetRegisterOpcode } from '../opcodes/SetRegisterOpcode';
@@ -79,6 +81,8 @@ export class OpcodeFactory {
         break;
       }
       case 0xa: return new SetIndexRegisterOpcode(instruction & 0x0fff);
+      case 0xb: return new JumpOffsetOpCode(instruction & 0x0fff);
+      case 0xc: return new RandomOpcode(bytes[2], instruction & 0xff);
       case 0xd: return new DisplayOpcode(bytes[2], bytes[1], bytes[0]);
       case 0xf: {
         switch(instruction & 0xff){

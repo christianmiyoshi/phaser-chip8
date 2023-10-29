@@ -1,7 +1,7 @@
 import { Display } from '../../../application/graphics/Display';
 import { Emulator } from '../../emulator/Emulator';
 import { RightShiftOpcode } from './RightShiftOpcode';
-import { SetIndexRegisterOpcode } from './SetIndexRegisterOpcode';
+
 
 describe('RightShiftOpcode', () => {
   it('Right Shift with vx <= vy', () => {
