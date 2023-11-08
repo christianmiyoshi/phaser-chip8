@@ -1,4 +1,5 @@
 import ibmBin from '@assets/ibm.ch8';
+import chip8Logo from '@assets/1-chip8-logo.ch8';
 import testOpcodeRom from '@assets/test_opcode.ch8'
 import { Display, WIDTH, HEIGHT } from 'src/application/graphics/Display';
 import { Emulator } from 'src/chip8/emulator/Emulator';
